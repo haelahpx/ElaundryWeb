@@ -5,7 +5,6 @@ import { UserContext } from "../context/UserContext";
 const ProtectedRoute = ({ children }) => {
     const { userId } = useContext(UserContext);
 
-    // Check if userId exists in context
     if (!userId) {
         return <Navigate to="/" replace />;
     }

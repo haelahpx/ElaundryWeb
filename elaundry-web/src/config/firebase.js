@@ -11,14 +11,11 @@ const firebaseConfig = {
     appId: "1:36308749406:android:52d528ec9cda581f9478cf",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Log Firebase initialization for debugging (only after initialization)
 console.log("Firebase initialized successfully:", app.name);
 
 export const auth = getAuth(app);
 export const database = getDatabase(app);
 
-// Export database utility functions
 export { ref, get, set, remove, update };

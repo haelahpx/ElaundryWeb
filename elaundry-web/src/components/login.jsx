@@ -4,14 +4,14 @@ import { auth, database } from "../config/firebase.js";
 import { ref, get } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext.jsx";
-import { ToastContainer, toast } from "react-toastify"; // Import Toastify components
-import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
+import { ToastContainer, toast } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const { setUserRole, setUserId, setLaundryShopId } = useContext(UserContext); // Access context functions
+    const { setUserRole, setUserId, setLaundryShopId } = useContext(UserContext);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -24,22 +24,19 @@ const Login = () => {
 
             if (snapshot.exists()) {
                 const userData = snapshot.val();
-                setUserRole(userData.role); // Set role in context
-                setUserId(userId); // Set userId in context
+                setUserRole(userData.role); 
+                setUserId(userId);
 
-                // Ensure that the laundryShopId is set correctly
                 if (userData.laundry_shop_id) {
-                    setLaundryShopId(userData.laundry_shop_id); // Set shopId in context
+                    setLaundryShopId(userData.laundry_shop_id);
                 } else {
                     toast.error("Laundry Shop ID not found for this user.");
                 }
 
-                // Save to localStorage
                 localStorage.setItem('userId', userId);
                 localStorage.setItem('laundryShopId', userData.laundry_shop_id || '');
                 localStorage.setItem('userRole', userData.role);
 
-                // Navigate to appropriate dashboard based on role
                 if (userData.role === "admin") {
                     navigate("/admin-dashboard");
                     toast.success("Welcome Admin!");
@@ -59,17 +56,17 @@ const Login = () => {
     };
 
     return (
-        <div className="bg-white flex h-screen">
+        <div className="flex h-screen bg-white">
             <div className="flex items-center justify-center w-1/2 p-10">
-                <div className="px-12 py-12 w-full max-w-lg">
+                <div className="w-full max-w-lg px-12 py-12">
                     <form onSubmit={handleLogin} className="login-form">
-                        <h2 className="text-3xl font-bold mb-8 text-center">Login</h2>
+                        <h2 className="mb-8 text-3xl font-bold text-center">Login</h2>
                         <div className="mb-6">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                            <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="email">
                                 Email
                             </label>
                             <input
-                                className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700"
+                                className="w-full px-4 py-3 text-gray-700 border rounded shadow appearance-none"
                                 id="email"
                                 type="email"
                                 placeholder="Email"
@@ -79,11 +76,11 @@ const Login = () => {
                             />
                         </div>
                         <div className="mb-6">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                            <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="password">
                                 Password
                             </label>
                             <input
-                                className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700"
+                                className="w-full px-4 py-3 text-gray-700 border rounded shadow appearance-none"
                                 id="password"
                                 type="password"
                                 placeholder="Password"
@@ -92,10 +89,10 @@ const Login = () => {
                                 required
                             />
                         </div>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded w-full" type="submit">
+                        <button className="w-full px-4 py-3 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" type="submit">
                             Login
                         </button>
-                        <p className="mt-6 text-center text-gray-600 text-sm">
+                        <p className="mt-6 text-sm text-center text-gray-600">
                             Don’t have an account?{" "}
                             <a href="/register" className="text-blue-500 hover:underline">Register</a>
                         </p>

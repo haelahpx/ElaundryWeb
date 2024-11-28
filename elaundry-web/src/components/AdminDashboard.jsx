@@ -118,7 +118,6 @@ const AdminDashboard = () => {
                     <span className="text-xl text-blue-600">{username}</span> {/* Display username */}
                 </div>
                 
-                {/* Categories Cards */}
                 <div className="space-y-6">
                     {loading ? (
                         <div className="text-xl text-center text-blue-600">Loading...</div>
@@ -159,16 +158,14 @@ const AdminDashboard = () => {
                 </button>
             </div>
 
-            {/* Modal for Adding Category */}
             {modalType === "add" && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="p-8 bg-white rounded-lg shadow-xl w-96">
                         <h3 className="mb-6 text-xl font-semibold text-center text-blue-600">Choose a Category</h3>
 
-                        {/* Category buttons (Predefined categories) */}
                         <div className="space-y-4">
                             {predefinedCategories.map((category) => {
-                                const isSelected = categories.some(([key]) => key === category); // Check if category already exists
+                                const isSelected = categories.some(([key]) => key === category); 
                                 return (
                                     <button
                                         key={category}
@@ -195,7 +192,6 @@ const AdminDashboard = () => {
                 </div>
             )}
 
-            {/* Modal for Editing Category */}
             {modalType === "edit" && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="p-8 bg-white rounded-lg shadow-xl w-96">

@@ -17,7 +17,7 @@ const SuperAdminDashboard = () => {
         console.log("User ID:", userId);
         console.log("User Role:", userRole);
         if (!userId || userRole !== "superadmin") {
-            navigate("/login");
+            navigate("/");
         }
     }, [userId, userRole, navigate]);
 
@@ -28,8 +28,8 @@ const SuperAdminDashboard = () => {
                 const snapshot = await get(ref(database, "laundry_shops"));
                 if (snapshot.exists()) {
                     const fetchedShops = Object.entries(snapshot.val()).map(([id, shop]) => ({
-                        shop_id: id, // Firebase key as shop_id
-                        admin_id: shop.admin_id, // Corresponds to user_id
+                        shop_id: id,
+                        admin_id: shop.admin_id, 
                         ...shop,
                     }));
                     setLaundryShops(fetchedShops);
@@ -57,7 +57,7 @@ const SuperAdminDashboard = () => {
         }
     
         try {
-            const response = await fetch("http://localhost:5000/delete-user", { // Update URL to match your backend server
+            const response = await fetch("http://localhost:5000/delete-user", { 
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -70,7 +70,6 @@ const SuperAdminDashboard = () => {
                 throw new Error(errorData.error || "Failed to delete user");
             }
     
-            // Update local state to reflect deletion
             setLaundryShops((prevShops) => prevShops.filter((shop) => shop.shop_id !== shopId));
     
             toast.success("User and associated data have been deleted successfully.");
@@ -81,10 +80,10 @@ const SuperAdminDashboard = () => {
     };
     
     return (
-        <div className="superadmin-dashboard bg-gray-100 min-h-screen">
+        <div className="min-h-screen bg-gray-100 superadmin-dashboard">
             <Navbar />
-            <div className="max-w-7xl mx-auto p-6">
-                <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">Super Admin Dashboard</h2>
+            <div className="p-6 mx-auto max-w-7xl">
+                <h2 className="mb-8 text-3xl font-bold text-left text-gray-800">Super Admin Dashboard</h2>
                 {loading ? (
                     <p className="text-center text-gray-500">Loading...</p>
                 ) : (
@@ -92,18 +91,18 @@ const SuperAdminDashboard = () => {
                         {laundryShops.map((shop) => (
                             <div
                                 key={shop.shop_id}
-                                className="bg-white shadow-md rounded-lg p-4 flex flex-col md:flex-row justify-between items-start md:items-center"
+                                className="flex flex-col items-start justify-between p-4 bg-white rounded-lg shadow-md md:flex-row md:items-center"
                             >
                                 <div className="flex-1">
-                                    <h4 className="text-lg font-semibold text-gray-700 mb-2">{shop.name}</h4>
-                                    <p className="text-sm text-gray-500 mb-1">Address: {shop.address}</p>
-                                    <p className="text-sm text-gray-500 mb-1">Phone: {shop.phone}</p>
-                                    <p className="text-sm text-gray-500 mb-1">Status: {shop.status}</p>
+                                    <h4 className="mb-2 text-lg font-semibold text-gray-700">{shop.name}</h4>
+                                    <p className="mb-1 text-sm text-gray-500">Address: {shop.address}</p>
+                                    <p className="mb-1 text-sm text-gray-500">Phone: {shop.phone}</p>
+                                    <p className="mb-1 text-sm text-gray-500">Status: {shop.status}</p>
                                     <p className="text-sm text-gray-500">Created At: {shop.created_at}</p>
                                 </div>
                                 <button
                                     onClick={() => handleDeleteUser(shop.admin_id, shop.shop_id)}
-                                    className="mt-4 md:mt-0 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+                                    className="px-4 py-2 mt-4 text-white bg-red-500 rounded md:mt-0 hover:bg-red-600"
                                 >
                                     Delete
                                 </button>
