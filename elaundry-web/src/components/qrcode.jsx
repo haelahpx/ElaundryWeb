@@ -22,7 +22,7 @@ const QRCodeGenerator = () => {
         <>
             <Navbar />
             <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
-                <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-lg">
+                <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-2xl">
                     <h1 className="mb-6 text-3xl font-extrabold text-center text-gray-800">
                         QR Price Generator
                     </h1>
@@ -37,8 +37,8 @@ const QRCodeGenerator = () => {
                             <input
                                 type="text"
                                 id="userInput"
-                                className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg"
-                                placeholder="e.g., 12000"
+                                className="w-full px-4 py-3 mt-2 border border-gray-300 rounded-lg"
+                                placeholder="put the price"
                                 value={userInput}
                                 onChange={(e) => setUserInput(e.target.value)}
                                 required
