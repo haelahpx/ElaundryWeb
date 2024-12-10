@@ -127,7 +127,7 @@ const AdminDashboard = () => {
                                 <h3 className="text-xl font-semibold text-blue-600">{categoryName}</h3>
                                 <p className="mb-4 text-gray-600">{data.description || "No description available."}</p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-lg font-semibold text-blue-600">Price: ${data.price}</span>
+                                    <span className="text-lg font-semibold text-blue-600">Price: Rp.{data.price}</span>
                                     <div>
                                         <button
                                             onClick={() => handleDeleteCategory(categoryName)}
