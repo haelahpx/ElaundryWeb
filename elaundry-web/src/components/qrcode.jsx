@@ -1,4 +1,3 @@
-// pages/QRCodeGenerator.js
 import React, { useState } from "react";
 import Navbar from "./ui/navbar";
 
